@@ -1,0 +1,404 @@
+:root {
+    --bg-light-black: #121412; /* richer, near-black */
+    --panel: #0f2515;
+    --font-forest-green: #1f7a3a;
+    --text: #eaf6ef;
+    --muted: #a3cbb0;
+    --motion-duration: .28s;
+    --lift-amount: -6px;
+    --btn-lift: -4px;
+}
+
+body {
+    background-color: var(--bg-light-black);
+    color: var(--text);
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: radial-gradient(rgba(255,255,255,0.01) 1px, transparent 1px), linear-gradient(135deg, rgba(31,122,58,0.02), transparent 40%);
+    background-size: 1200px 1200px, cover;
+}
+
+.card {
+    background-color: var(--panel);
+    border: 1px solid rgba(255,255,255,0.03);
+    overflow: hidden;
+}
+
+/* Subtle interactive styles */
+.card { transition: transform var(--motion-duration) ease, box-shadow var(--motion-duration) ease; }
+.card:hover{ transform: translateY(var(--lift-amount)); box-shadow: 0 22px 42px rgba(0,0,0,0.55); }
+.btn { transition: transform calc(var(--motion-duration) * .72) ease, box-shadow calc(var(--motion-duration) * .72) ease; }
+.btn:hover{ transform: translateY(var(--btn-lift)); box-shadow: 0 12px 28px rgba(0,0,0,0.38); }
+.btn:active{ transform: translateY(calc(var(--btn-lift) / 2)) scale(.995); }
+
+/* Nav underline animation */
+.navbar .nav-link{ position: relative; overflow: visible; }
+.navbar .nav-link::after{ content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0%; background: var(--text); transition: width .28s ease; }
+.navbar .nav-link:hover::after, .navbar .nav-link.active::after{ width: 100%; }
+
+/* Input focus highlight */
+input:focus, textarea:focus{ outline: none; box-shadow: 0 0 0 4px rgba(34,139,34,0.06); border-color: rgba(34,139,34,0.9); }
+
+/* Smooth subtle loading shimmer for cards */
+.card .shimmer{background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 100%); background-size: 200% 100%; animation: shimmer 1.8s linear infinite}
+@keyframes shimmer{ 0%{background-position:200% 0}100%{background-position:-200% 0} }
+
+/* Ripple effect for buttons */
+.ripple{position:absolute;border-radius:50%;pointer-events:none;background:rgba(255,255,255,0.12);transform:scale(0);animation:ripple-anim .6s ease-out}
+@keyframes ripple-anim{to{transform:scale(4);opacity:0}}
+.btn{position:relative;overflow:hidden}
+
+.navbar-dark .navbar-brand{
+    color: var(--font-forest-green) !important;
+    letter-spacing: 0.6px;
+}
+.navbar-dark .nav-link { color: rgba(255,255,255,0.9) !important; }
+.navbar-dark .nav-link:hover { color: var(--muted) !important; }
+
+.btn-success {
+    background-color: var(--font-forest-green);
+    border-color: rgba(31,122,58,0.9);
+    box-shadow: 0 8px 30px rgba(31,122,58,0.06);
+}
+.btn-success:hover {
+    background-color: #1d6f2f;
+    border-color: rgba(29,111,47,0.9);
+}
+
+footer a {
+    color: var(--font-forest-green);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #90EE90;
+}
+
+main {
+    min-height: calc(100vh - 200px);
+    padding-top: 36px;
+}
+
+.qna-item {
+    background: rgba(255,255,255,0.02);
+    border-left: 4px solid var(--font-forest-green);
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.answer {
+    background: #444;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+html, body, body * {
+    color: var(--text) !important;
+}
+
+/* Hero decoration positioning */
+.hero{position:relative;display:block}
+.hero-decor{position:absolute;right:-12px;top:2px;opacity:0.9;pointer-events:none;border-radius:12px}
+
+/* Interactive decoration styles (subtle, non-childish) */
+.hero-decor{pointer-events:auto;cursor:pointer;transition:transform .36s var(--motion-duration),filter .36s ease,opacity .36s ease}
+.hero-decor:focus{outline:none}
+.hero-decor--active{transform:translateY(-6px) scale(1.02);filter:drop-shadow(0 14px 30px rgba(31,122,58,0.12));opacity:1}
+
+/* bank details easter-egg */
+#bank-details{transition:box-shadow .28s ease,transform .28s ease,border-color .28s ease}
+.bank-easter{box-shadow:0 18px 40px rgba(31,122,58,0.08);transform:translateY(-6px);border-color:rgba(31,122,58,0.16)!important}
+
+/* small ephemeral toast used by easter eggs */
+.site-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:rgba(15,37,21,0.92);color:var(--text);padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);z-index:1200;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+.site-toast.hidden{opacity:0;pointer-events:none;transition:opacity .2s ease}
+
+/* Headings refinement */
+h1.display-4{font-weight:600;letter-spacing:0.2px}
+h3{font-weight:600}
+
+/* Footer refinement */
+footer{border-top:1px solid rgba(255,255,255,0.03)}
+footer p{margin:0}
+
+/* Make Bootstrap alerts visible on dark theme */
+.alert, .alert-info {
+    background-color: rgba(31,122,58,0.10) !important; /* subtle forest green */
+    color: var(--text) !important;
+    border-color: rgba(31,122,58,0.16) !important;
+}
+
+/* Ensure small/muted notes are readable */
+.text-muted, .small {
+    color: rgba(234,246,239,0.85) !important;
+}
+
+/* Global form control styling: replace bright white inputs with subtle dark panels */
+.form-control, input, textarea, select {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.04) !important;
+    color: var(--text) !important;
+    transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+}
+.form-control::placeholder, input::placeholder, textarea::placeholder { color: rgba(234,246,239,0.55) !important; }
+.form-control:focus, input:focus, textarea:focus, select:focus {
+    background: rgba(255,255,255,0.035) !important;
+    box-shadow: 0 8px 28px rgba(31,122,58,0.06) !important;
+    border-color: rgba(31,122,58,0.18) !important;
+    outline: none !important;
+}
+
+/* Page-specific decorations using body classes - each page gets its own theme accents and shapes */
+body.page-home{ --page-accent: rgba(31,122,58,0.06); }
+body.page-home .hero{ box-shadow: inset 0 -80px 120px rgba(0,0,0,0.25); border-radius:12px }
+body.page-home .hero .hero-decor{ right:-18px; top:8px }
+body.page-home .deco-dot{ position:absolute; left:18px; top:20px; width:12px; height:12px; background:linear-gradient(180deg,var(--font-forest-green), rgba(31,122,58,0.85)); border-radius:50%; box-shadow:0 10px 26px rgba(31,122,58,0.12); transform:translateZ(0) }
+
+/* Multiple home decos to avoid crowding - positioned around edges */
+body.page-home .home-deco{ position:fixed; z-index:3; pointer-events:none; border-radius:50%; opacity:0.95 }
+/* Move the top-left deco away from the hero and make all home decos larger but subtle */
+body.page-home .home-deco-1{ width:22px; height:22px; left:24px; top:220px; background:linear-gradient(180deg,var(--font-forest-green), rgba(31,122,58,0.7)); box-shadow:0 16px 36px rgba(31,122,58,0.08); opacity:0.92; }
+body.page-home .home-deco-2{ width:36px; height:36px; left:48px; top:48px; background:rgba(31,122,58,0.08); box-shadow:0 18px 44px rgba(0,0,0,0.38); border-radius:50% }
+body.page-home .home-deco-3{ width:20px; height:20px; right:160px; top:36px; background:rgba(255,255,255,0.035); box-shadow:0 12px 30px rgba(0,0,0,0.28); }
+body.page-home .home-deco-4{ width:28px; height:28px; right:28px; top:140px; background:linear-gradient(180deg, rgba(31,122,58,0.12), rgba(31,122,58,0.02)); opacity:0.9 }
+body.page-home .home-deco-5{ width:16px; height:16px; left:48%; top:14%; background:rgba(31,122,58,0.06); transform:translateX(-50%); box-shadow:0 8px 24px rgba(0,0,0,0.26) }
+
+/* Slightly increase size of other page decos to maintain balance and subtlety */
+body.page-donate .donate-deco-1{ width:58px; height:58px; }
+body.page-donate .donate-deco-2{ width:16px; height:16px; }
+body.page-donate .donate-deco-4{ width:28px; height:28px; }
+body.page-forum .forum-deco-3{ width:22px; height:22px; }
+body.page-forum .forum-deco-5{ width:18px; height:18px; }
+body.page-about .about-deco-3{ width:18px; height:18px; }
+body.page-about .about-deco-4{ width:24px; height:24px; }
+body.page-how .how-deco-2{ width:22px; height:22px; }
+body.page-lynx .lynx-deco-2{ width:22px; height:22px; }
+
+/* Donate page: multiple decos */
+body.page-donate .donate-deco{ position:fixed; z-index:2; pointer-events:none; border-radius:8px }
+body.page-donate .donate-deco-1{ width:46px; height:46px; left:18px; bottom:18px; background:linear-gradient(180deg, rgba(31,122,58,0.12), rgba(31,122,58,0.04)) }
+body.page-donate .donate-deco-2{ width:12px; height:12px; left:110px; bottom:72px; background:var(--font-forest-green); border-radius:50% }
+body.page-donate .donate-deco-3{ width:10px; height:10px; right:96px; top:86px; background:rgba(255,255,255,0.03); border-radius:50% }
+body.page-donate .donate-deco-4{ width:22px; height:22px; right:22px; bottom:120px; background:rgba(31,122,58,0.08); border-radius:6px }
+body.page-donate .donate-deco-5{ width:14px; height:14px; left:48%; bottom:32px; background:rgba(31,122,58,0.06); border-radius:50%; transform:translateX(-50%) }
+
+/* Forum decos (up to 5) */
+body.page-forum .forum-deco-1{ position:fixed; right:18px; top:80px; width:120px; height:4px; background:linear-gradient(90deg,var(--font-forest-green), rgba(31,122,58,0.6)); border-radius:4px; opacity:0.12 }
+body.page-forum .forum-deco-2{ position:fixed; left:8px; bottom:18px; width:8px; height:8px; background:var(--muted); border-radius:2px; opacity:0.9 }
+body.page-forum .forum-deco-3{ position:fixed; left:28px; top:120px; width:16px; height:16px; background:rgba(31,122,58,0.08); border-radius:50% }
+body.page-forum .forum-deco-4{ position:fixed; right:48px; bottom:120px; width:10px; height:10px; background:rgba(255,255,255,0.03); border-radius:50% }
+body.page-forum .forum-deco-5{ position:fixed; right:120px; top:28px; width:14px; height:14px; background:rgba(31,122,58,0.06); border-radius:50% }
+
+/* About page decos */
+body.page-about .about-deco-3{ position:fixed; left:32px; top:60px; width:12px; height:12px; background:var(--font-forest-green); border-radius:50% }
+body.page-about .about-deco-4{ position:fixed; right:48px; bottom:48px; width:18px; height:18px; background:rgba(31,122,58,0.08); border-radius:50% }
+body.page-about .about-deco-5{ position:fixed; left:50%; top:10px; width:10px; height:10px; background:rgba(31,122,58,0.06); border-radius:50%; transform:translateX(-50%) }
+
+/* How page decos */
+body.page-how .how-deco-1{ position:fixed; left:8px; top:28px; width:12px; height:12px; background:var(--font-forest-green); border-radius:50% }
+body.page-how .how-deco-2{ position:fixed; left:80px; top:40px; width:18px; height:18px; background:rgba(31,122,58,0.06); border-radius:4px }
+body.page-how .how-deco-3{ position:fixed; right:28px; top:68px; width:10px; height:10px; background:rgba(255,255,255,0.03); border-radius:50% }
+body.page-how .how-deco-4{ position:fixed; right:120px; bottom:180px; width:22px; height:22px; background:rgba(31,122,58,0.08); border-radius:50% }
+body.page-how .how-deco-5{ position:fixed; left:48%; bottom:24px; width:14px; height:14px; background:rgba(31,122,58,0.05); border-radius:50%; transform:translateX(-50%) }
+
+/* LYNX page decos */
+body.page-lynx .lynx-deco-1{ position:fixed; left:10px; top:100px; width:10px; height:10px; background:linear-gradient(180deg,var(--font-forest-green), rgba(31,122,58,0.6)); border-radius:50% }
+body.page-lynx .lynx-deco-2{ position:fixed; left:60px; top:60px; width:18px; height:18px; background:rgba(31,122,58,0.08); border-radius:6px }
+body.page-lynx .lynx-deco-3{ position:fixed; right:30px; top:60px; width:12px; height:12px; background:rgba(255,255,255,0.03); border-radius:50% }
+body.page-lynx .lynx-deco-4{ position:fixed; right:90px; bottom:90px; width:16px; height:16px; background:rgba(31,122,58,0.06); border-radius:50% }
+body.page-lynx .lynx-deco-5{ position:fixed; left:48%; top:12%; width:14px; height:14px; background:rgba(31,122,58,0.05); border-radius:50%; transform:translateX(-50%) }
+
+/* Base refinements */
+:root{
+  --polish-max-width:1200px;
+  --polish-radius:12px;
+  --polish-muted:rgba(234,246,239,0.72);
+  --polish-low: rgba(255,255,255,0.02);
+  --polish-elev: rgba(0,0,0,0.5);
+  --polish-backdrop: rgba(12,24,12,0.6);
+  --polish-border: rgba(255,255,255,0.04);
+}
+
+/* Typographic rhythm */
+html{font-family:Poppins, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+body{line-height:1.55}
+h1,h2,h3,h4{line-height:1.08; margin-top:0; margin-bottom:0.6rem}
+h1.display-4{font-size:2.4rem}
+h2{font-size:1.55rem}
+h3{font-size:1.15rem}
+@media(min-width:900px){ h1.display-4{font-size:3.2rem} }
+
+/* Content container */
+.polish-container{max-width:var(--polish-max-width);margin:0 auto;padding:28px}
+
+/* Cards: premium look */
+.polish-card{background:linear-gradient(180deg,var(--panel), rgba(7,32,14,0.88));border-radius:var(--polish-radius);padding:18px;border:1px solid var(--polish-border);box-shadow:0 14px 36px rgba(2,8,4,0.48);transition:transform .32s cubic-bezier(.2,.9,.25,1),box-shadow .32s ease}
+.polish-card:hover{transform:translateY(-6px);box-shadow:0 30px 56px rgba(2,8,4,0.6)}
+.polish-card--flat{box-shadow:none;border:1px solid rgba(255,255,255,0.02)}
+.polish-card{position:relative;overflow:hidden}
+
+/* Extra decorative accents for all cards: layered glows, textured overlays */
+.card{position:relative;overflow:visible}
+.card::before{content:'';position:absolute;left:-40%;top:-40%;width:200%;height:200%;background:radial-gradient(circle at 20% 10%, rgba(31,122,58,0.08), transparent 12%, rgba(255,255,255,0.01) 30%);transform:rotate(12deg);opacity:0.9;pointer-events:none}
+.card::after{content:'';position:absolute;right:-40px;bottom:-40px;width:160px;height:160px;background:conic-gradient(from 180deg at 50% 50%, rgba(31,122,58,0.14), rgba(255,255,255,0.02));filter:blur(18px);border-radius:50%;opacity:0.08;pointer-events:none;transition:transform .5s ease,opacity .4s ease}
+.card:hover::after{transform:scale(1.08);opacity:0.14}
+
+/* decorative inner highlight stripe */
+.card .card-body{position:relative;z-index:2}
+.card .card-body::before{content:'';position:absolute;left:0;top:0;height:6px;width:90px;background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(31,122,58,0.12));border-radius:0 0 6px 6px;box-shadow:0 6px 18px rgba(0,0,0,0.25);opacity:0.95}
+
+/* Subtle patterned overlay to add texture (may slightly reduce clarity) */
+.card .pattern-overlay{pointer-events:none;position:absolute;inset:0;background-image:linear-gradient(135deg, rgba(255,255,255,0.006) 0 2px, transparent 2px 4px);mix-blend-mode:overlay;opacity:0.5}
+
+/* Manual transfer card decoration */
+.manual-transfer-card{position:relative;overflow:visible}
+.manual-transfer-card .manual-deco{position:absolute;right:12px;top:12px;width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg, rgba(31,122,58,0.14), rgba(31,122,58,0.06));box-shadow:0 10px 30px rgba(31,122,58,0.06);pointer-events:none;opacity:0.95}
+.manual-transfer-card .manual-badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--polish-muted);font-weight:600;font-size:12px}
+.manual-transfer-note{margin-top:8px;color:rgba(234,246,239,0.78);font-size:13px}
+
+/* Stronger polish for polish-cards */
+.polish-card::before{content:'';position:absolute;left:-10%;top:-10%;width:120%;height:120%;background:linear-gradient(135deg, rgba(31,122,58,0.02), rgba(255,255,255,0.01));transform:skewY(-3deg);pointer-events:none}
+.polish-card::after{content:'';position:absolute;right:12px;top:12px;width:40px;height:40px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), rgba(31,122,58,0.06));border-radius:8px;opacity:0.7;mix-blend-mode:screen}
+
+/* page-specific stronger accents (optional: may make layout busier) */
+.page-home .card::after{opacity:0.12}
+.page-donate .card::after{opacity:0.14;right:-20px;bottom:-20px}
+.page-forum .card::after{opacity:0.10;right:-10px;bottom:-10px}
+
+/* accessibility: ensure overlays don't capture pointer events */
+.card::before,.card::after,.card .pattern-overlay,.polish-card::before,.polish-card::after{pointer-events:none}
+
+/* Hero polish */
+.polish-hero{padding:36px;border-radius:16px;background:linear-gradient(180deg, rgba(31,122,58,0.03), transparent);position:relative;overflow:hidden}
+.polish-hero .eyebrow{font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-size:13px}
+.polish-hero p.lead{font-size:1.05rem;color:var(--polish-muted);margin-top:8px}
+
+/* Button system */
+.btn-polish{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--font-forest-green);color:white;border:none;box-shadow:0 8px 26px rgba(31,122,58,0.08);transition:transform .22s ease,box-shadow .22s ease,opacity .2s ease}
+.btn-polish:hover{transform:translateY(-3px);box-shadow:0 20px 46px rgba(31,122,58,0.10)}
+.btn-polish.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text);box-shadow:none}
+.btn-polish:active{transform:translateY(0)}
+
+/* Secondary subtle CTA */
+.btn-subtle{background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--polish-muted);padding:8px 12px;border-radius:8px}
+
+/* Input polish */
+.polish-input{background:linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.01));border:1px solid var(--polish-border);padding:10px 12px;border-radius:10px;color:var(--text);transition:box-shadow .18s ease,transform .18s ease}
+.polish-input:focus{box-shadow:0 12px 40px rgba(31,122,58,0.06);border-color:rgba(31,122,58,0.16);outline:none}
+.polish-textarea{min-height:120px}
+
+/* Form rows */
+.form-row{display:flex;gap:12px;flex-wrap:wrap}
+.form-row .col{flex:1}
+@media(max-width:700px){.form-row{flex-direction:column}}
+
+/* subtle separators */
+.rule{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.02),transparent);margin:18px 0;border-radius:1px}
+
+/* Footer refinement */
+footer{background:linear-gradient(180deg, rgba(0,0,0,0.3), transparent);padding:28px 12px;border-top:1px solid rgba(255,255,255,0.02)}
+footer .small{color:var(--polish-muted)}
+
+/* Utility spacing */
+.u-mb-xs{margin-bottom:6px}
+.u-mb-sm{margin-bottom:12px}
+.u-mb{margin-bottom:18px}
+.u-mt{margin-top:18px}
+
+/* Tiny micro-animations */
+@keyframes polish-breathe{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+.breathe{animation:polish-breathe 6s ease-in-out infinite}
+
+/* focus ring for accessibility */
+*:focus{outline:none}
+.focus-ring{box-shadow:0 0 0 4px rgba(31,122,58,0.12);border-radius:8px}
+
+/* Crisp borders for tables/list */
+.polish-list{padding:12px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.014), rgba(255,255,255,0.008));border:1px solid rgba(255,255,255,0.02)}
+.polish-list li{padding:10px 6px;border-bottom:1px dashed rgba(255,255,255,0.02)}
+
+/* Small helpers for decor mute */
+body.clean-polish .home-deco, body.clean-polish .donate-deco, body.clean-polish .forum-deco-*, body.clean-polish .about-deco-*, body.clean-polish .how-deco-*, body.clean-polish .lynx-deco-*{opacity:0.18;transform:none}
+
+/* Polished modal styles override for Bootstrap modals */
+.modal-content{background:linear-gradient(180deg,var(--panel), rgba(7,32,14,0.96));border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.modal-header{border-bottom:1px solid rgba(255,255,255,0.02)}
+.modal-footer{border-top:1px solid rgba(255,255,255,0.02)}
+
+/* Toast polish placement (used by interactive decos) */
+.site-toast{background:linear-gradient(180deg, rgba(7,24,12,0.92), rgba(7,24,12,0.86));border-radius:999px;padding:8px 16px;font-size:13px}
+
+/* Preference detection: reduce motion */
+@media(prefers-reduced-motion:reduce){
+  .polish-card, .breathe, .hero-visual, .carousel, .btn-polish{animation:none;transition:none}
+}
+
+/* Print friendliness */
+@media print{
+  body{color:#000;background:#fff}
+  .polish-card, .hero-decor, .home-deco, .donate-deco{box-shadow:none;background:#fff}
+}
+
+/* End of polish block */
+
+body.page-donate{ --page-accent: rgba(31,122,58,0.04); }
+body.page-donate .card{ border-radius:12px }
+body.page-donate .donate-deco{ position:absolute; left:12px; bottom:12px; width:46px; height:46px; background:linear-gradient(180deg, rgba(31,122,58,0.12), rgba(31,122,58,0.04)); border-radius:10px; box-shadow:0 10px 26px rgba(0,0,0,0.5) }
+body.page-donate .bank-details{ font-weight:600 }
+
+body.page-forum{ --page-accent: rgba(34,139,34,0.03); }
+body.page-forum .forum-deco-a{ position: absolute; right:18px; top:80px; width:120px; height:4px; background:linear-gradient(90deg,var(--font-forest-green), rgba(31,122,58,0.6)); border-radius:4px; opacity:0.12 }
+body.page-forum .forum-deco-b{ position:absolute; left:8px; bottom:18px; width:8px; height:8px; background:var(--muted); border-radius:2px; opacity:0.9 }
+
+body.page-about{ background-image: linear-gradient(120deg, rgba(31,122,58,0.02), transparent 40%); }
+body.page-about .about-deco-1{ position:absolute; right:12px; top:120px; width:160px; height:160px; border-radius:20px; background:linear-gradient(180deg, rgba(31,122,58,0.06), rgba(31,122,58,0.02)); opacity:0.9 }
+body.page-about .about-deco-2{ position:absolute; left:12px; bottom:120px; width:100px; height:100px; background:rgba(255,255,255,0.02); border-radius:12px }
+
+body.page-how{ background-image: radial-gradient(circle at 10% 10%, rgba(31,122,58,0.03), transparent 20%); }
+body.page-how .how-badge{ display:inline-block; padding:6px 10px; background:rgba(31,122,58,0.14); border-radius:999px; color:var(--text); margin-right:8px }
+
+body.page-lynx .lynx-ribbon{ position:relative; display:block; margin-bottom:12px }
+body.page-lynx .feature-dot{ width:10px; height:10px; display:inline-block; background:linear-gradient(180deg,var(--font-forest-green), rgba(31,122,58,0.8)); border-radius:50%; margin-right:8px }
+
+/* Ensure decorative absolute elements don't overlap content on small screens */
+@media (max-width:900px){ .hero-decor, .donate-deco, .about-deco-1 { display:none } }
+
+/* Community page styles */
+body.page-community .polish-hero{padding:36px;border-radius:12px;background:linear-gradient(180deg, rgba(31,122,58,0.03), rgba(0,0,0,0.02));}
+.social-grid{padding:20px;}
+.social-grid .row{gap:14px}
+.social-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;border-radius:12px;text-decoration:none;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);color:var(--text);transition:transform .22s ease,box-shadow .22s ease,filter .2s ease;height:100%}
+.social-icon{}
+.social-btn svg{margin-bottom:10px}
+.social-label{font-weight:600}
+.social-btn:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.5);filter:brightness(1.05)}
+.social-btn:active{transform:translateY(-2px)}
+.social-btn[aria-label="YouTube"]{background:linear-gradient(180deg, rgba(255,0,0,0.06), rgba(255,0,0,0.02));border-color:rgba(255,0,0,0.08)}
+.social-btn[aria-label="Discord"]{background:linear-gradient(180deg, rgba(88,101,242,0.06), rgba(88,101,242,0.02));border-color:rgba(88,101,242,0.06)}
+.social-btn[aria-label="TikTok"]{background:linear-gradient(180deg, rgba(0,242,234,0.04), rgba(0,0,0,0.02));border-color:rgba(0,242,234,0.04)}
+.social-btn[aria-label="Instagram"]{background:linear-gradient(180deg, rgba(225,48,108,0.04), rgba(255,200,80,0.02));border-color:rgba(225,48,108,0.04)}
+.social-btn[aria-label="Email"]{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-color:rgba(255,255,255,0.02)}
+.social-label{margin-top:6px;color:var(--text)}
+.social-grid .col{display:flex}
+.social-grid .col .social-btn{flex:1}
+
+/* Carousel styles */
+#carousel{position:relative;overflow:hidden;height:140px}
+.carousel-wrapper{position:relative}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:12;border-radius:8px;background:rgba(0,0,0,0.5);color:var(--text);border:1px solid rgba(255,255,255,0.04);width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.carousel-prev{left:12px}
+.carousel-next{right:12px}
+.carousel-slide{flex:0 0 100%;height:140px;display:flex;align-items:center;justify-content:center;padding:12px 22px;box-sizing:border-box;font-weight:600;color:var(--polish-muted);transition:transform .45s cubic-bezier(.2,.9,.25,1);will-change:transform}
+.community-carousel,.feature-carousel{display:flex;transition:transform .45s cubic-bezier(.2,.9,.25,1)}
+.carousel-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-top:1px solid rgba(255,255,255,0.02);margin-top:8px}
+.carousel-dots{display:flex;gap:8px;align-items:center}
+.carousel-dot{width:10px;height:10px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+.carousel-dot.active{background:var(--font-forest-green);box-shadow:0 6px 18px rgba(31,122,58,0.12)}
+.carousel-progress{flex:1;height:4px;background:rgba(255,255,255,0.02);border-radius:4px;overflow:hidden;margin-left:12px}
+.carousel-progress span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--font-forest-green), rgba(255,255,255,0.06));transition:width 0s linear}
+@media (max-width:700px){ #carousel{height:100px}.carousel-slide{height:100px;padding:10px} }
+
+/* User request: remove home decorative dots */
+body.page-home .home-deco,
+body.page-home .deco-dot { display: none !important; }
